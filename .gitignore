@@ -1,12 +1,31 @@
-*.class
+package me.Angelfist.Heal;
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+public class Heal extends JavaPlugin{
+	
+	@SuppressWarnings("deprecation")
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String []args){
+		if(cmd.getName().equalsIgnoreCase("heal"));
+		
+		Player p = (Player) sender;
+		
+		if(args.length == 0) {
+			p.sendMessage(ChatColor.GOLD + "-----------------");
+			p.sendMessage(ChatColor.GOLD + "Usage: /heal me");
+			p.sendMessage(ChatColor.GOLD + "-----------------");
+			return true;
+		}
+		else if(args.length == 1) 
+			if (args[0].equalsIgnoreCase("me")) {
+				p.setHealth(20);
+				p.sendMessage(ChatColor.GREEN + "You have been healed!");
+				return true;
+			}
+		return true;
+	}
+}
